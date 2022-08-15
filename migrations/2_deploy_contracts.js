@@ -1,4 +1,5 @@
 const Tether = artifacts.require("Tether");
+// const AwesomeToken = artifacts.require("AwesomeToken");
 const RWD = artifacts.require("RWD");
 const DecentralBank = artifacts.require("DecentralBank");
 
@@ -7,11 +8,15 @@ module.exports = async function(deployer, network, accounts) {
   await deployer.deploy(Tether);
   const tether = await Tether.deployed();
 
-  // Deploy Mock Tether Contract
+  // // Deploy Awesome Token Contract
+  // await deployer.deploy(AwesomeToken);
+  // const awesomeToken = await AwesomeToken.deployed();
+
+  // Deploy RWD Token Contract
   await deployer.deploy(RWD);
   const rwd = await RWD.deployed();
 
-  // Deploy Mock Tether Contract
+  // Deploy DecentralBank Contract
   await deployer.deploy(DecentralBank, rwd.address, tether.address);
   const decentralBank = await DecentralBank.deployed();
 
