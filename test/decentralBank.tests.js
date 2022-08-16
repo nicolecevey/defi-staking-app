@@ -99,6 +99,12 @@ contract("DecentralBank", ([owner, customer]) => {
         "true",
         "customer is staking status after staking"
       );
+
+      // Issue tokens
+      await decentralBank.issueTokens({ from: owner });
+
+      // Insure only the owner can issue tokens
+      await decentralBank.issueTokens({ from: customer }).should.be.rejected;
     });
   });
 });
