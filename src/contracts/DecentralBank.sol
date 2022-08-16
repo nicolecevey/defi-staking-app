@@ -18,7 +18,7 @@ contract DecentralBank {
 
     mapping(address => uint256) public stakingBalance;
     mapping(address => bool) public hasStaked;
-    mapping(address => bool) public isStaked;
+    mapping(address => bool) public isStaking;
 
     // Staking function that deposits Tether tokens to the Decentral Bank contract for staking
     // Need the transferFrom function
@@ -32,12 +32,27 @@ contract DecentralBank {
         // Update staking balancce
         stakingBalance[msg.sender] = stakingBalance[msg.sender] + _amount;
 
-        if (!hasStaked) {
-            stakers.push[msg.sender];
+        if (!hasStaked[msg.sender]) {
+            stakers.push(msg.sender);
         }
 
         // Update staking balancce
         isStaking[msg.sender] = true;
         hasStaked[msg.sender] = true;
+    }
+
+    // Issue rewards
+    function issueTokens() public {
+        // Require the owner to issue the tokens only
+        require(msg.sender == owner, "caller must be the owner");
+
+        // Iterate through array of stakers and reward the stakers that are staking
+        for (uint256 i = 0; i < stakers.length; i++) {
+            address recipient = stakers[i];
+            uint256 balance = stakingBalance[recipient] / 9; // Divide by 9 to create incentive for stakers
+            if (balance > 0) {
+                rwd.transfer(recipient, balance);
+            }
+        }
     }
 }
