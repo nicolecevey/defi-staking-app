@@ -1,0 +1,13 @@
+.navbar {
+    background-color: black;
+    display: flex;
+    height: 5rem;
+
+    &__link {
+        color: white;
+    }
+
+    &__list-item {
+        color: white;
+    }
+}
