@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Web3 from "web3";
+import Tether from "./truffle_abis/Tether.json";
+import RWD from "./truffle_abis/RWD.json";
+import DecentralBank from "./truffle_abis/DecentralBank.json";
 
 class App extends Component {
   state = {
@@ -36,7 +39,56 @@ class App extends Component {
     this.setState({
       account: account[0],
     });
-    console.log(account);
+    const networkId = await web3.eth.net.getId();
+
+    // Load Tether contract
+    const tetherData = Tether.networks[networkId];
+    if (tetherData) {
+      const tether = new web3.eth.Contract(Tether.abi, tetherData.address);
+      this.setState({
+        tether: tether,
+      });
+      let tetherBalance = await tether.methods
+        .balanceOf(this.state.account)
+        .call(); // methods requires call()
+      this.setState({ tetherBalance: tetherBalance.toString() });
+    } else {
+      window.alert(
+        "Error! Tether network contract not deployed - no detected network!"
+      );
+    }
+
+    // Load RWD contract
+    const rwdData = RWD.networks[networkId];
+    if (rwdData) {
+      const rwd = new web3.eth.Contract(RWD.abi, rwdData.address);
+      this.setState({
+        rwd: rwd,
+      });
+      let rwdBalance = await rwd.methods.balanceOf(this.state.account).call(); // methods requires call()
+      this.setState({ rwdBalance: rwdBalance.toString() });
+    } else {
+      window.alert("Error! Reward Token not deployed to the network!");
+    }
+
+    // Load Decentral Bank contract
+    const decentralBankData = DecentralBank.networks[networkId];
+    if (decentralBankData) {
+      const decentralBank = new web3.eth.Contract(
+        DecentralBank.abi,
+        decentralBankData.address
+      );
+      this.setState({
+        decentralBank: decentralBank,
+      });
+      let stakingBalance = await decentralBank.methods
+        .stakingBalance(this.state.account)
+        .call(); // methods requires call()
+      this.setState({ stakingBalance: stakingBalance.toString() });
+    } else {
+      window.alert("Error! Decentral Bank not deployed to the network!");
+    }
+    this.setState({ loading: false });
   }
 
   render() {

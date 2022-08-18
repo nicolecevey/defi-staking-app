@@ -9,6 +9,7 @@ class Navbar extends Component {
         <a
           className="navbar__link navbar-brand col-sm-3 col-md-2 mr-0"
           style={{ color: "white" }}
+          href="/"
         >
           <img
             src={bank}
