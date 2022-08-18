@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import "./global.scss";
 import Navbar from "./components/Navbar/Navbar";
+import StakingCard from "./components/StakingCard/StakingCard";
 import Web3 from "web3";
 import Tether from "./truffle_abis/Tether.json";
 import RWD from "./truffle_abis/RWD.json";
@@ -95,6 +97,10 @@ class App extends Component {
     return (
       <>
         <Navbar account={this.state.account} />
+        <StakingCard
+          stakingBalance={this.state.stakingBalance}
+          rwdBalance={this.state.rwdBalance}
+        />
       </>
     );
   }

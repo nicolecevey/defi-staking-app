@@ -1,13 +1,39 @@
 .navbar {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.11);
     display: flex;
-    height: 5rem;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    backdrop-filter: blur(4px);
 
     &__link {
         color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        letter-spacing: .25rem;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &__logo {
+        height: 3rem;
+        width: 3.5rem;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin: 0;
     }
 
     &__list-item {
         color: white;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.705);
+        };
     }
 }
