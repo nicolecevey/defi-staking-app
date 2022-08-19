@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Navbar.scss";
-import bank from "../../bank.png";
+// import bank from "../../bank.png";
 import logo from "../../images/logo.png";
 
 class Navbar extends Component {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./StakingCard.scss";
+import StakingForm from "../StakingForm/StakingForm";
 
 class StakingCard extends Component {
   render() {
@@ -7,14 +8,17 @@ class StakingCard extends Component {
       <main className="card">
         <div className="card__balances">
           <div className="card__staking">
-            <h2 className="card__text">STAKING BALANCE</h2>
+            <h1 className="card__text">STAKING BALANCE</h1>
             <p className="card__amount">{this.props.stakingBalance} USDT</p>
           </div>
           <div className="card__rwd">
-            <h2 className="card__text">REWARD BALANCE</h2>
+            <h1 className="card__text">REWARD BALANCE</h1>
             <p className="card__amount">{this.props.rwdBalance} RWD</p>
           </div>
         </div>
+        <StakingForm />
+        <h2>AIRDROP</h2>
+        <p></p>
       </main>
     );
   }
