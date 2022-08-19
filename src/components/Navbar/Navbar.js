@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Navbar.scss";
-// import bank from "../../bank.png";
 import logo from "../../images/logo.png";
+import githubIcon from "../../images/github-icon.png";
 
 class Navbar extends Component {
   render() {
@@ -20,12 +20,15 @@ class Navbar extends Component {
         <ul className="navbar__list">
           <li className="navbar__list-item">How To</li>
           <li className="navbar__list-item">Demo</li>
-        </ul>
-        {/* <ul className="navbar__list">
-          <li className="navbar__list-item">
-            ACCOUNT NUMBER: {this.props.account}
+          <li>
+            <a
+              href="https://github.com/nicolecevey/defi-staking-app"
+              target="_blank"
+            >
+              <img src={githubIcon} className="navbar__github-icon"></img>
+            </a>
           </li>
-        </ul> */}
+        </ul>
       </nav>
     );
   }

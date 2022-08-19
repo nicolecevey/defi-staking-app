@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./global.scss";
+import "./styles/global.scss";
 import Navbar from "./components/Navbar/Navbar";
 import StakingCard from "./components/StakingCard/StakingCard";
 import Web3 from "web3";
@@ -96,7 +96,10 @@ class App extends Component {
   render() {
     return (
       <>
-        <Navbar account={this.state.account} />
+        <Navbar />
+        <div className="account-number">
+          <p>Account: {this.state.account}</p>
+        </div>
         <StakingCard
           stakingBalance={this.state.stakingBalance}
           rwdBalance={this.state.rwdBalance}

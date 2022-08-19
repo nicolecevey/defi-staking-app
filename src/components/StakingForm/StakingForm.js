@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./StakingForm.scss";
-import tetherIcon from "../../images/tether.png";
+import tetherIcon from "../../images/tether-usdt-logo.png";
 
 class StakingForm extends Component {
   render() {
