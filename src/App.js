@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./styles/global.scss";
 import Navbar from "./components/Navbar/Navbar";
-import StakingCard from "./components/StakingCard/StakingCard";
 import Web3 from "web3";
 import Tether from "./truffle_abis/Tether.json";
 import RWD from "./truffle_abis/RWD.json";
 import DecentralBank from "./truffle_abis/DecentralBank.json";
+import HomePage from "./pages/HomePage";
 
 class App extends Component {
   state = {
@@ -17,6 +17,7 @@ class App extends Component {
     rwdBalance: "0",
     stakingBalance: "0",
     loading: true,
+    menuOpen: false,
   };
 
   async UNSAFE_componentWillMount() {
@@ -93,17 +94,57 @@ class App extends Component {
     this.setState({ loading: false });
   }
 
+  // Two functions: One that stakes and one that unstakes
+  // Leverage our decentralBank contract - deposit tokens and unstaking
+
+  // Staking function :
+  // Set loading state to true until function finishes
+  // use depositTokens transferFrom function
+  // Approve transaction hash to deposit tokens (takes address and amount)
+  stakeTokens = (amount) => {
+    this.setState({ loading: true });
+    this.state.tether.methods
+      .approve(this.state.decentralBank._address, amount)
+      .send({ from: this.state.account })
+      .on("transactionHash", (hash) => {
+        this.state.decentralBank.methods
+          .depositTokens(amount)
+          .send({ from: this.state.account })
+          .on("transactionHash", (hash) => {
+            this.setState({ loading: false });
+          });
+      });
+  };
+
+  // Unstaking function
+  unStakeTokens = () => {
+    this.setState({ loading: true });
+    this.state.decentralBank.methods
+      .unstakeTokens()
+      .send({ from: this.state.account })
+      .on("transactionHash", (hash) => {
+        this.setState({ loading: false });
+      });
+  };
+
   render() {
+    let content;
+    this.state.loading
+      ? (content = <p>Loading...</p>)
+      : (content = (
+          <HomePage
+            account={this.state.account}
+            stakingBalance={this.state.stakingBalance}
+            rwdBalance={this.state.rwdBalance}
+            tetherBalance={this.state.tetherBalance}
+            stakeTokens={this.stakeTokens}
+          />
+        ));
+
     return (
       <>
-        <Navbar />
-        <div className="account-number">
-          <p>Account: {this.state.account}</p>
-        </div>
-        <StakingCard
-          stakingBalance={this.state.stakingBalance}
-          rwdBalance={this.state.rwdBalance}
-        />
+        <Navbar menuOpen={this.state.menuOpen} />
+        {content}
       </>
     );
   }

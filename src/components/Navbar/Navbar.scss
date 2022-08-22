@@ -1,3 +1,5 @@
+@use "../../styles/partials/mixins" as *;
+
 .navbar {
     background-color: rgba(0, 0, 0, 0.11);
     display: flex;
@@ -23,10 +25,14 @@
     }
 
     &__list {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        margin: 0;
+        display: none;
+
+        @include tablet {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 0;
+        }
     }
 
     &__list-item {
@@ -45,5 +51,47 @@
         &:hover {
             opacity: 80%;
         }
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 33px;
+        height: 25px;
+        cursor: pointer;
+
+        @include tablet {
+            display: none;
+        }
+    
+        span {
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            transform-origin: left;
+            transition: all 1s ease;
+        }
+    }
+
+    &.active {
+        color: white;
+
+        .hamburger {
+            span {
+                &:first-child {
+                    background-color: white;
+                    transform: rotate(45deg)
+                }
+                &:nth-child(2) {
+                    opacity: 0;
+                }
+                &:last-child {
+                    background-color: white;
+                    transform: rotate(-47.5deg)
+                }
+            }
+        }
+        
     }
 }

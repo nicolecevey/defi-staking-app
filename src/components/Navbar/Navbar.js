@@ -5,8 +5,9 @@ import githubIcon from "../../images/github-icon.png";
 
 class Navbar extends Component {
   render() {
+    const menuOpen = this.props.menuOpen;
     return (
-      <nav className="navbar">
+      <nav className={"navbar " + (menuOpen && "active")}>
         <a className="navbar__link" style={{ color: "white" }} href="/">
           <img
             src={logo}
@@ -29,6 +30,14 @@ class Navbar extends Component {
             </a>
           </li>
         </ul>
+        <div
+          className="hamburger"
+          onClick={() => this.setState({ menuOpen: !menuOpen })}
+        >
+          <span className="hamburger--line1"></span>
+          <span className="hamburger--line2"></span>
+          <span className="hamburger--line3"></span>
+        </div>
       </nav>
     );
   }
