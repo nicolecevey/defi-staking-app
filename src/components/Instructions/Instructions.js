@@ -7,7 +7,7 @@ class Instructions extends Component {
       <section className="instructions">
         <h1 className="instructions__title">HOW TO USE THIS APP:</h1>
         <ol className="instructions__list">
-          <li className="instructions-item">
+          <li className="instructions__list-item">
             You will need to connect to a MetaMask wallet
           </li>
           <li className="instructions__list-item">
