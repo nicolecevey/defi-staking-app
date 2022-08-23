@@ -16,7 +16,11 @@ class StakingForm extends Component {
       >
         <div className="form__tokens">
           <h2>Stake Tokens </h2>
-          <p>Balance: {window.web3.utils.fromWei(this.props.tetherBalance)}</p>
+          <p>
+            Balance:{" "}
+            {window.web3.utils.fromWei(this.props.tetherBalance, "ether") /
+              10000}
+          </p>
         </div>
         <div className="form__input-row">
           <input
