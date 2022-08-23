@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./StakingCard.scss";
 import StakingForm from "../StakingForm/StakingForm";
+import Airdrop from "../Airdrop/Airdrop";
 
 class StakingCard extends Component {
   render() {
-    console.log(this.props.stakingBalance);
     return (
       <main className="card">
         <div className="card__balances">
@@ -18,13 +18,22 @@ class StakingCard extends Component {
           <div className="card__rwd">
             <h1 className="card__text">REWARD BALANCE</h1>
             <p className="card__amount">
-              {window.web3.utils.fromWei(this.props.rwdBalance, "Ether")} RWD
+              {Math.ceil(
+                window.web3.utils.fromWei(this.props.rwdBalance, "Ether")
+              )}{" "}
+              RWD
             </p>
           </div>
         </div>
-        <StakingForm tetherBalance={this.props.tetherBalance} />
-        <h2>AIRDROP</h2>
-        <p></p>
+        <StakingForm
+          tetherBalance={this.props.tetherBalance}
+          stakeTokens={this.props.stakeTokens}
+          unstakeTokens={this.props.unstakeTokens}
+        />
+        <Airdrop
+          stakingBalance={this.props.stakingBalance}
+          issueReward={this.props.issueReward}
+        />
       </main>
     );
   }

@@ -117,10 +117,21 @@ class App extends Component {
   };
 
   // Unstaking function
-  unStakeTokens = () => {
+  unstakeTokens = () => {
     this.setState({ loading: true });
     this.state.decentralBank.methods
       .unstakeTokens()
+      .send({ from: this.state.account })
+      .on("transactionHash", (hash) => {
+        this.setState({ loading: false });
+      });
+  };
+
+  // Issuing reward tokens function
+  issueReward = () => {
+    this.setState({ loading: true });
+    this.state.decentralBank.methods
+      .issueTokens()
       .send({ from: this.state.account })
       .on("transactionHash", (hash) => {
         this.setState({ loading: false });
@@ -138,6 +149,8 @@ class App extends Component {
             rwdBalance={this.state.rwdBalance}
             tetherBalance={this.state.tetherBalance}
             stakeTokens={this.stakeTokens}
+            unstakeTokens={this.unstakeTokens}
+            issueReward={this.issueReward}
           />
         ));
 

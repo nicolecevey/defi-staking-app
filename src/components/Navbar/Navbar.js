@@ -25,8 +25,13 @@ class Navbar extends Component {
             <a
               href="https://github.com/nicolecevey/defi-staking-app"
               target="_blank"
+              rel="noopener noreferrer"
             >
-              <img src={githubIcon} className="navbar__github-icon"></img>
+              <img
+                src={githubIcon}
+                className="navbar__github-icon"
+                alt="Github Icon"
+              ></img>
             </a>
           </li>
         </ul>
