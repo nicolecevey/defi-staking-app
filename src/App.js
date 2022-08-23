@@ -6,6 +6,7 @@ import Tether from "./truffle_abis/Tether.json";
 import RWD from "./truffle_abis/RWD.json";
 import DecentralBank from "./truffle_abis/DecentralBank.json";
 import HomePage from "./pages/HomePage";
+import MobileMenu from "./components/MobileMenu/MobileMenu";
 
 class App extends Component {
   state = {
@@ -141,7 +142,7 @@ class App extends Component {
   render() {
     let content;
     this.state.loading
-      ? (content = <p>Loading...</p>)
+      ? (content = <p style={{ textAlign: "center" }}>Loading...</p>)
       : (content = (
           <HomePage
             account={this.state.account}
@@ -151,12 +152,17 @@ class App extends Component {
             stakeTokens={this.stakeTokens}
             unstakeTokens={this.unstakeTokens}
             issueReward={this.issueReward}
+            menuOpen={this.state.menuOpen}
           />
         ));
 
     return (
       <>
-        <Navbar menuOpen={this.state.menuOpen} />
+        <Navbar
+          menuOpen={this.state.menuOpen}
+          onClick={() => this.setState({ menuOpen: !this.state.menuOpen })}
+        />
+        {this.state.menuOpen && <MobileMenu menuOpen={this.state.menuOpen} />}
         {content}
       </>
     );
