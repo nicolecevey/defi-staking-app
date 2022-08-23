@@ -1,0 +1,55 @@
+@use "../../styles/partials/mixins" as *;
+
+.mobile-menu {
+    background-color: rgba(0, 0, 0, 0.11);
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    @include tablet {
+        display: none;
+    }
+
+    &__link {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        letter-spacing: .25rem;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &__logo {
+        height: 3rem;
+        width: 3.5rem;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin: 0;
+    }
+    
+
+    &__list-item {
+        color: white;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.705);
+        };
+    }
+
+    &__github-icon {
+        height: 2rem;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 80%;
+        }
+    }
+}
