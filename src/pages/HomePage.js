@@ -1,7 +1,6 @@
 import StakingCard from "../components/StakingCard/StakingCard";
 import "./HomePage.scss";
 import React, { Component } from "react";
-import MobileMenu from "../components/MobileMenu/MobileMenu";
 
 class HomePage extends Component {
   render() {
