@@ -7,6 +7,7 @@ import RWD from "./truffle_abis/RWD.json";
 import DecentralBank from "./truffle_abis/DecentralBank.json";
 import HomePage from "./pages/HomePage";
 import MobileMenu from "./components/MobileMenu/MobileMenu";
+import Instructions from "./components/Instructions/Instructions";
 
 class App extends Component {
   state = {
@@ -19,6 +20,7 @@ class App extends Component {
     stakingBalance: "0",
     loading: true,
     menuOpen: false,
+    connected: false,
   };
 
   async UNSAFE_componentWillMount() {
@@ -92,7 +94,7 @@ class App extends Component {
     } else {
       window.alert("Error! Decentral Bank not deployed to the network!");
     }
-    this.setState({ loading: false });
+    this.setState({ connected: true });
   }
 
   // Two functions: One that stakes and one that unstakes
@@ -140,22 +142,6 @@ class App extends Component {
   };
 
   render() {
-    let content;
-    this.state.loading
-      ? (content = <p style={{ textAlign: "center" }}>Loading...</p>)
-      : (content = (
-          <HomePage
-            account={this.state.account}
-            stakingBalance={this.state.stakingBalance}
-            rwdBalance={this.state.rwdBalance}
-            tetherBalance={this.state.tetherBalance}
-            stakeTokens={this.stakeTokens}
-            unstakeTokens={this.unstakeTokens}
-            issueReward={this.issueReward}
-            menuOpen={this.state.menuOpen}
-          />
-        ));
-
     return (
       <>
         <Navbar
@@ -163,7 +149,27 @@ class App extends Component {
           onClick={() => this.setState({ menuOpen: !this.state.menuOpen })}
         />
         {this.state.menuOpen && <MobileMenu menuOpen={this.state.menuOpen} />}
-        {content}
+        {this.state.loading && this.state.connected && (
+          <p style={{ textAlign: "center", marginTop: "2rem" }}>Loading...</p>
+        )}
+        {!this.state.connected && (
+          <>
+            <p style={{ textAlign: "center", marginTop: "2rem" }}>
+              Please connect to MetaMask
+            </p>
+            <Instructions />
+          </>
+        )}
+        <HomePage
+          account={this.state.account}
+          stakingBalance={this.state.stakingBalance}
+          rwdBalance={this.state.rwdBalance}
+          tetherBalance={this.state.tetherBalance}
+          stakeTokens={this.stakeTokens}
+          unstakeTokens={this.unstakeTokens}
+          issueReward={this.issueReward}
+          menuOpen={this.state.menuOpen}
+        />
       </>
     );
   }

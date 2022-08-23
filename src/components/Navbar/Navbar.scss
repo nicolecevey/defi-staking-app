@@ -37,6 +37,7 @@
 
     &__list-item {
         color: white;
+        list-style-type: none;
 
         &:hover {
             color: rgba(255, 255, 255, 0.705);

@@ -21,9 +21,8 @@ class Navbar extends Component {
             &nbsp; &nbsp; DAPP YIELD FARM
           </a>
           <ul className="navbar__list">
-            <li className="navbar__list-item">How To</li>
             <li className="navbar__list-item">Demo</li>
-            <li>
+            <li className="navbar__list-item">
               <a
                 href="https://github.com/nicolecevey/defi-staking-app"
                 target="_blank"
